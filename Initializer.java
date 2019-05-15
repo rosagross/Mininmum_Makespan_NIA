@@ -9,6 +9,13 @@ package minimumMakespan;
  */
 public interface Initializer {
 	
-	public 
+	/**
+	 * Method that shows that the Initializer should have the method initializePopulation().
+	 * That could be the random initialization or the equal initialization that implement this interface.
+	 * @param nrGenes
+	 * @param populationSize
+	 * @return a population of chromosomes
+	 */
+	public int[][] initializePopulation(Problem p, int populationSize);
 	
 }

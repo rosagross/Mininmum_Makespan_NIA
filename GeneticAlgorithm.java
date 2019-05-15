@@ -28,7 +28,6 @@ public class GeneticAlgorithm {
 		this.initializer = initializer;
 		this.selector = selector;
 		this.recombiner = recombiner;
-		
 	}
 	
 	
