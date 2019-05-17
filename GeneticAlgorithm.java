@@ -28,6 +28,8 @@ public class GeneticAlgorithm {
 		this.initializer = initializer;
 		this.selector = selector;
 		this.recombiner = recombiner;
+		this.mutator = mutator;
+		this.replacer = replacer;
 	}
 	
 	
@@ -36,8 +38,27 @@ public class GeneticAlgorithm {
 	 * for our problem
 	 * @return
 	 */
-	public Assignment search(Problem p) {
+	public int[] search(Problem p, int pop_size, int pool_size, double mutation_prob, long time_limit) {
+		
+		long time_spent = 0;
+		long noIterations = 0;
+		long startTime = System.currentTimeMillis();
+		
+		int[][] population = initializer.initializePopulation(p, pop_size);
+		int[][] mating_pool;
+		int[][] offspring;
+		
+		do {
+			mating_pool = selector.select(p, population, pool_size);
+			offspring = recombiner.recombine(mating_pool);
+			mutator.mutate(p, offspring, mutation_prob);
+			population = replacer.replace(p, population, offspring);
+			
+			time_spent = System.currentTimeMillis() - startTime;
+		
+		} while (time_spent < time_limit);
 		
 		
+		return getFittest(p, population).getAssignment();
 	}
 }

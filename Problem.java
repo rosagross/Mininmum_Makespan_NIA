@@ -1,5 +1,10 @@
 package minimumMakespan;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * The class Problem defines the problem that we have to solve.
  * It can read out the details from the filename.
@@ -11,6 +16,16 @@ public class Problem {
 	private String name;
 	private int numberMachines;
 	private int numberJobs;
+	private int[] jobs;
+	
+	
+	public Problem(String filename) {
+		parseProblemDetails(filename);
+		this.name = getProblemName();
+		this.numberMachines = getNumberMachines();
+		this.numberJobs = getNumberJobs();
+		this.jobs = getJobs();
+	}
 	
 	/**
 	 * This method takes the filename (called in main programm) and reads out the name, the
@@ -24,6 +39,36 @@ public class Problem {
 		this.numberMachines = Integer.parseInt(ProblemArray[1]);
 		this.numberJobs = Integer.parseInt(ProblemArray[2]);		
 	}
+	
+	/**
+	 * This method takes the filename (called in main programm) and stores the values in a 2d 
+	 * @param fileName
+	 */
+	public int[] getJobs() {
+		this.jobs = new int[this.numberJobs];
+		
+		String[] values = new String[numberJobs]; 
+
+		try (BufferedReader br = new BufferedReader(new FileReader("benchmark1_20_300.csv"))) {
+			
+		   
+			String line;
+			int j = 0;
+			while ((line = br.readLine()) != null) {
+				jobs[j] = Integer.parseInt(line);
+				j++;
+			} 
+		   
+		} catch (FileNotFoundException e) {
+			System.out.println("The file doesn't exist, make sure that it is in your directory.. Stop programm");
+			System.exit(-1);
+		} catch (IOException e) {
+			System.out.println("Error IOException.. Stop programm");
+			System.exit(-1);
+		}	
+		return this.jobs;
+	}
+	
 	
 	/**
 	 * Getter method for the name of the problem
