@@ -34,7 +34,6 @@ public class GeneticAlgorithm {
 		this.replacer = replacer;
 	}
 	
-	
 	/**
 	 * This method is called if we want to find the best (specfied by the getFittest() method) Assignment
 	 * for our problem
@@ -60,13 +59,11 @@ public class GeneticAlgorithm {
 		
 		} while (time_spent < time_limit);
 		
-		
 		return population[getFittest(p, population)];
 	}
 	
 	/**
-	 * This method is the objective funtion of the minimum makespan problem.
-	 * It goes through the population array and finds the minimum time of all chromosome assignments,
+	 * This method goes through the population array and finds the minimum time of all chromosome assignments,
 	 * which is the max time of the printer. 
 	 * @param p
 	 * @param population
@@ -97,11 +94,9 @@ public class GeneticAlgorithm {
 	/**
 	 * Find the maximum of an array. Needed to find the machine with the
 	 * largest processing time.
-	 * @param machines
+	 * @param a
 	 */
-	private static int findMax(int[] a) {
-		System.out.println("Machines:");
-		Test.printChromosome(a);
+	public static int findMax(int[] a) {
 		int max = a[0];
 		for(int i = 1; i < a.length;i++)
 		{
@@ -110,22 +105,37 @@ public class GeneticAlgorithm {
 				max = a[i];
 			}
 		}
-		System.out.println(max);
 		return max;
+	}
+	
+	/**
+	 * Find the index of minimum of an array. Needed to find the fittest out of stored fittnessvalues.
+	 * @param a
+	 */
+	public static int findMinIndex(int[] a) {
+		int min = a[0];
+		int indexMin = 0;
+		for(int i = 1; i < a.length;i++) {
+			if(a[i] < min) {
+				min = a[i];
+				indexMin = i;
+			}
+		}
+		return indexMin;
 	}
 	
 	/**
 	 * Calculate the value of the objective function
 	 * @param machines
 	 */
-	public static int getFitness(Problem p, int[]chromosome) {
+	public static int getFitness(Problem p, int[] chromosome) {
 		int[] machines = new int[p.getNumberMachines()];
 		int machineID;
 		int[] processingTimes = p.getJobs();
-		
 		for (int j = 0; j < p.getNumberJobs(); j++) {
 			// read out entry in the chromosome
 			machineID = chromosome[j];
+			
 			// add the processing time to the field of the correct machine ID
 			machines[machineID] += processingTimes[j];			
 		}
