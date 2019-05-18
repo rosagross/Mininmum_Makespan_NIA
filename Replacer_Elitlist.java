@@ -11,7 +11,7 @@ public class Replacer_Elitlist implements Replacer {
 		
 		//get best chromosomes from population
 		for (int i = 0; i < population[0].length/2; i++) {
-			fittestChromosome = getFittest(population);
+			fittestChromosome = GeneticAlgorithm.getFittest(p, population);
 
 			for (int j = 0; j < population.length; j++) {
 				newPopulation[i][j] = population[fittestChromosome][j];
@@ -22,7 +22,7 @@ public class Replacer_Elitlist implements Replacer {
 		
 		//get best chromosomes from offspring
 		for (int i = 0; i < offspring[0].length/2; i++) {
-			fittestChromosome = getFittest(offspring);
+			fittestChromosome = GeneticAlgorithm.getFittest(p, offspring);
 
 			for (int j = 0; j < population.length; j++) {
 				newPopulation[i + population[0].length/2 ][j] = offspring[fittestChromosome][j];
