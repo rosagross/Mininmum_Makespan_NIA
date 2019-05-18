@@ -3,11 +3,12 @@ import java.util.Random;
 
 public class Mutation_Swap implements Mutator {
 	
-	//This class implements one version to mutate the current mating pool.
-	//Mutation rate determines the probability for each chromosome to change.
-	
-	//mutationRate is double [0, 1]
-	//mutate by switching two jobs to different machines
+	/**
+	 * This class implements one version to mutate the current mating pool.
+	 * Mutation rate determines the probability for each chromosome to change.
+	 * mutationRate is double [0, 1]
+	 * mutate by switching two jobs to different machines
+	 */
 	@Override
 	public int[][] mutate(Problem p, int[][] pool, double mutationRate) {
 		//round to int?

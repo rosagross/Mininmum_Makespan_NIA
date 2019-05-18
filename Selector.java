@@ -4,6 +4,7 @@ package minimumMakespan;
  * @author Rosa
  *
  */
-public abstract class Selector {
-
+public interface Selector {
+	
+	public int[][] select(Problem p, int[][] population, int pop_size);
 }
