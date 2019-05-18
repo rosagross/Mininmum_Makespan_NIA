@@ -1,10 +1,9 @@
 package minimumMakespan;
 
-import java.io.BufferedWriter;
+
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 /**
  * In the Main class we call the actual programm. We just have to set the problem filename,
@@ -18,15 +17,15 @@ public class Main {
 		
 		// specify problem
 		Problem p = new Problem("benchmark1_20_300"); 
-		System.out.println("Jobs: ");
-		printChromosome(p.getJobs());
-		System.out.println(" ");
-		System.out.println(" ");
+		//System.out.println("Jobs: ");
+		//printChromosome(p.getJobs());
+		//System.out.println(" ");
+		//System.out.println(" ");
 
 		
 		// specify modules
-		Initializer initializer = new RandomInit();
-		Selector selector = new SelectFitnessProportionate();
+		Initializer initializer = new Initialize_random();
+		Selector selector = new Select_First_Best();
 		Recombiner recombiner = new Recombine_Template();
 		Mutator mutator = new Mutation_Swap();
 		Replacer replacer = new Replacer_Elitlist();
@@ -42,7 +41,7 @@ public class Main {
 		
 		//save results
 		int[][] results = new int[100][4];
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 100; i++) {
 			
 			genAlgorithm.search(p, pop_size, pool_size, mutation_prob, time_limit);
 			
@@ -55,23 +54,43 @@ public class Main {
 
 		}
 		
-		String home = System.getProperty("user.home⁩") + "/Desktop/";
-		Path path = Paths.get(home, "data.csv");
-		String zeile = "";
-		try(BufferedWriter bw = Files.newBufferedWriter(path)) {
-			
-			for (int i = 0; i < 100; i++) {
+		
+		FileWriter fileWriter = null;
+        
+        try {
+            fileWriter = new FileWriter("data.csv");
+            fileWriter.append("Time,Iterations,Time per Iteration,Value");
+            fileWriter.append("\n");
+
+ 
+            for (int i = 0; i < 100; i++) {
 				for (int j = 0; j < 4; j++) {
-					zeile += String.valueOf(results[i][j]);
-					zeile += ";";
-					System.out.println(zeile);
+	                fileWriter.append(String.valueOf(results[i][j]));
+	                if (j != 3) {
+		                fileWriter.append(",");
+
+					}
+
 				}
-				bw.write(zeile);
+                fileWriter.append("\n");
+
 			}
-			
-		} catch (IOException ex) {
-			System.out.printf("IO: %s%n", ex.getMessage());
-		}
+              
+            System.out.println("CSV file was created successfully !!!");
+             
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+            
+           try {
+               fileWriter.flush();
+               fileWriter.close();
+           } catch (IOException e) {
+               System.out.println("Error while flushing/closing fileWriter !!!");
+               e.printStackTrace();
+           }
+        }
 		
 	}
 	

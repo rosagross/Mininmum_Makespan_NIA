@@ -50,7 +50,6 @@ public class GeneticAlgorithm {
 		this.duration = 0;
 		
 		long time_spent = 0;
-		long noIterations = 0;
 		long startTime = System.currentTimeMillis();
 		
 		int[][] population = initializer.initializePopulation(p, pop_size);
@@ -73,9 +72,9 @@ public class GeneticAlgorithm {
 		this.duration = (int) time_spent;
 		this.resultValue = getFitness(p, population[getFittest(p, population)]);
 		
-		Main.printChromosome(population[getFittest(p, population)]);
-		System.out.println(" ");
-		System.out.println(resultValue);
+		//Main.printChromosome(population[getFittest(p, population)]);
+		//System.out.println(" ");
+		//System.out.println(resultValue);
 		return population[getFittest(p, population)];
 	}
 	
