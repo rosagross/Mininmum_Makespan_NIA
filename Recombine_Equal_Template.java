@@ -1,10 +1,10 @@
 package minimumMakespan;
 import java.util.Random;
 
-//this class does not assure equally likely 0/1 in template
+//this class assures equal number of 0 and 1 in template
 //@author Tula
 
-public class Recombine_Template implements Recombiner {
+public class Recombine_Equal_Template implements Recombiner {
   
   @Override
   public int[][] recombine(int[][] mating_pool) {
@@ -45,16 +45,17 @@ public class Recombine_Template implements Recombiner {
     }
   }
   
-  //construct a template with not necessarily same amount of 0/1
-  //might be more zeros; but 0/1 is ambiguous since we take into account
-  //also the negation of the template
+  //construct a template with strictly same amount of 0/1
   public boolean[] template(int[][] mating_pool) {
     
     boolean[] template = new boolean[mating_pool.length];
     for(int i = 0; i < mating_pool.length; i++) {
       template[i] = false;
       if (i%2 == 0) {
-        int here = new Random().nextInt(mating_pool.length);
+    	int here;  
+        do {
+          here = new Random().nextInt(mating_pool.length);
+        } while (template[here] = true);
         template[here] = true;
       }
     }

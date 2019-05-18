@@ -8,19 +8,26 @@ public class Replacer_Delete_All implements Replacer {
 		int[][] newPopulation = new int[population.length][population[0].length];
 		int fitness; 
 		
-		if (getFitness(getFittest(population)) < getFitness(getFittest(offspring))) {
+		if (population[getFittest(population)][getFitness(population)] < offspring[getFittest(offspring)][getFitness(population)]) {
 			
 			return offspring;
 		} else {
-			for (int i = 0; i < offspring.length; i++) {
-				
+			
+			//get best chromosome from population and add to new pool
+			for (int j = 0; j < offspring.length; j++) {
+				newPopulation[0][j] = population[getFittest(population)][j];
+	
 			}
-		}
-		
-		
-		
+			//add all other chromosomes from offspring to new pool
+			for (int i = 1; i < offspring[0].length; i++) {
 
-	return newPopulation;	
+				for (int j = 0; j < offspring.length; j++) {
+					newPopulation[i][j] = offspring[i][j];
+				}
+			} 
+			return newPopulation;		
+		}
+			
 	}
 
 }

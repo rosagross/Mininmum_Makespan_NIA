@@ -3,7 +3,6 @@ import java.util.Random;
 
 public class Mutation_RdmMachines implements Mutator {
 	
-	
 	//mutate by assigning random machines to some entries of some chromosomes
 	@Override
 	public int[][] mutate(Problem p, int[][] pool, double mutationRate) {
@@ -14,7 +13,6 @@ public class Mutation_RdmMachines implements Mutator {
 				int rand = new Random().nextInt(pool.length);
 				chromosome[rand] = new Random().nextInt(p.getNumberMachines());
 			}
-			
 		}
 		return pool;
 	}
