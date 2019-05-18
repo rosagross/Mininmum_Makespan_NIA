@@ -11,6 +11,10 @@ import java.util.Arrays;
  *
  */
 public class GeneticAlgorithm {
+	
+	public static int duration;
+	public static int iterations;
+	public static int resultValue;
 
 	private Initializer initializer;
 	private Selector selector;
@@ -34,12 +38,16 @@ public class GeneticAlgorithm {
 		this.replacer = replacer;
 	}
 	
+	
 	/**
 	 * This method is called if we want to find the best (specfied by the getFittest() method) Assignment
 	 * for our problem
 	 * @return
 	 */
 	public int[] search(Problem p, int pop_size, int pool_size, double mutation_prob, long time_limit) {
+		
+		this.iterations = 0;
+		this.duration = 0;
 		
 		long time_spent = 0;
 		long noIterations = 0;
@@ -54,16 +62,26 @@ public class GeneticAlgorithm {
 			offspring = recombiner.recombine(p, mating_pool);
 			mutator.mutate(p, offspring, mutation_prob);
 			population = replacer.replace(p, population, offspring);
+
 			
 			time_spent = System.currentTimeMillis() - startTime;
+			
+			this.iterations ++;
 		
 		} while (time_spent < time_limit);
 		
+		this.duration = (int) time_spent;
+		this.resultValue = getFitness(p, population[getFittest(p, population)]);
+		
+		Main.printChromosome(population[getFittest(p, population)]);
+		System.out.println(" ");
+		System.out.println(resultValue);
 		return population[getFittest(p, population)];
 	}
 	
 	/**
-	 * This method goes through the population array and finds the minimum time of all chromosome assignments,
+	 * This method is the objective function of the minimum makespan problem.
+	 * It goes through the population array and finds the minimum time of all chromosome assignments,
 	 * which is the max time of the printer. 
 	 * @param p
 	 * @param population
@@ -94,9 +112,11 @@ public class GeneticAlgorithm {
 	/**
 	 * Find the maximum of an array. Needed to find the machine with the
 	 * largest processing time.
-	 * @param a
+	 * @param machines
 	 */
-	public static int findMax(int[] a) {
+	private static int findMax(int[] a) {
+		//System.out.println("Machines:");
+		//Test.printChromosome(a);
 		int max = a[0];
 		for(int i = 1; i < a.length;i++)
 		{
@@ -105,6 +125,9 @@ public class GeneticAlgorithm {
 				max = a[i];
 			}
 		}
+		//System.out.println(" ");
+
+		//System.out.println("Maximum :" + max);
 		return max;
 	}
 	
@@ -128,18 +151,20 @@ public class GeneticAlgorithm {
 	 * Calculate the value of the objective function
 	 * @param machines
 	 */
-	public static int getFitness(Problem p, int[] chromosome) {
+	public static int getFitness(Problem p, int[]chromosome) {
 		int[] machines = new int[p.getNumberMachines()];
 		int machineID;
 		int[] processingTimes = p.getJobs();
+		
 		for (int j = 0; j < p.getNumberJobs(); j++) {
 			// read out entry in the chromosome
 			machineID = chromosome[j];
-			
 			// add the processing time to the field of the correct machine ID
 			machines[machineID] += processingTimes[j];			
 		}
-		// now we need to find the machine with the longest processing time		
+		// now we need to find the machine with the longest processing time	
+		//System.out.println("Fitness :" + findMax(machines));
+
 		return findMax(machines);
 	}
 }
