@@ -1,4 +1,4 @@
-Tula, [18.05.2019, 17:24:57]:
+
 # Mininmum_Makespan_NIA
 Homework for Nature inspired algorithms: Genetic Algorithm solving the Minimum Makespan Problem
 
