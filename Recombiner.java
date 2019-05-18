@@ -4,5 +4,5 @@ package minimumMakespan;
 //@author Tula
 public interface Recombiner {
 
-  public int[][] recombine(int[][] mating_pool);
+  public int[][] recombine(Problem p, int[][] mating_pool);
 }

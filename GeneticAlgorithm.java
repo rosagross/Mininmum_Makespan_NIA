@@ -52,7 +52,7 @@ public class GeneticAlgorithm {
 		
 		do {
 			mating_pool = selector.select(p, population, pool_size);
-			offspring = recombiner.recombine(mating_pool);
+			offspring = recombiner.recombine(p, mating_pool);
 			mutator.mutate(p, offspring, mutation_prob);
 			population = replacer.replace(p, population, offspring);
 			

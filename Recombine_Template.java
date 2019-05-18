@@ -7,7 +7,7 @@ import java.util.Random;
 public class Recombine_Template implements Recombiner {
   
   @Override
-  public int[][] recombine(int[][] mating_pool) {
+  public int[][] recombine(Problem p, int[][] mating_pool) {
     
     int[][] new_pool = new int[mating_pool.length][mating_pool[0].length];
     int[][] dummy_pool = mating_pool;
@@ -15,12 +15,12 @@ public class Recombine_Template implements Recombiner {
   
     //dummy_pool is used to get the fittest members for each iteration
     for(int i = 0; i < mating_pool.length/2; i++) {
-      int first_partner = getFittest(dummy_pool);
+      int first_partner = GeneticAlgorithm.getFittest(p, dummy_pool);
       for(int j = 0; j < template.length; j++) {
         dummy_pool[first_partner][j] = 0;
       }
 
-      int second_partner = getFittest(dummy_pool);
+      int second_partner = GeneticAlgorithm.getFittest(p, dummy_pool);
       for(int j = 0; j < template.length; j++) {
         dummy_pool[second_partner][j] = 0;
       }
@@ -41,8 +41,9 @@ public class Recombine_Template implements Recombiner {
           new_pool[i + mating_pool.length/2][j] = mating_pool[first_partner][j];
         }
       }
-      return new_pool;
     }
+    return new_pool;
+
   }
   
   //construct a template with not necessarily same amount of 0/1
