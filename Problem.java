@@ -21,7 +21,10 @@ public class Problem {
 	
 	public Problem(String filename) {
 		parseProblemDetails(filename);
-		this.jobs = getJobsfromCSV((filename + ".csv"));
+		this.name = getProblemName();
+		this.numberMachines = getNumberMachines();
+		this.numberJobs = getNumberJobs();
+		this.jobs = getJobs();
 	}
 	
 	/**
@@ -41,11 +44,14 @@ public class Problem {
 	 * This method takes the filename (called in main programm) and stores the values in a 2d 
 	 * @param fileName
 	 */
-	public int[] getJobsfromCSV(String filename) {
+	public int[] getJobs() {
 		this.jobs = new int[this.numberJobs];
+		
+		String[] values = new String[numberJobs]; 
 
-		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("benchmark1_20_300.csv"))) {
 			
+		   
 			String line;
 			int j = 0;
 			while ((line = br.readLine()) != null) {
@@ -63,13 +69,6 @@ public class Problem {
 		return this.jobs;
 	}
 	
-	/**
-	 * Getter method for getting the job-array of the problem, that assigns the processing time to each job.
-	 * @return job-array
-	 */
-	public int[] getJobs() {
-	return this.jobs;	
-	}
 	
 	/**
 	 * Getter method for the name of the problem

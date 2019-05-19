@@ -40,15 +40,21 @@ public class Main {
 		int time_limit = 100;
 		
 		//save results
-		double[][] results = new double[100][4];
+		String[][] results = new String[100][6];
 		for (int i = 0; i < 100; i++) {
 			
 			genAlgorithm.search(p, pop_size, pool_size, mutation_prob, time_limit);
 			
-			results[i][0] = GeneticAlgorithm.duration;
-			results[i][1] = GeneticAlgorithm.iterations;
-			results[i][2] = GeneticAlgorithm.duration / GeneticAlgorithm.iterations;
-			results[i][3] = GeneticAlgorithm.resultValue;
+			//random and improved
+			results[i][0] = "Improved";
+			
+			results[i][1] = "population_size 10";
+			results[i][2] = String.valueOf(GeneticAlgorithm.duration);
+			results[i][3] = String.valueOf(GeneticAlgorithm.iterations);
+
+			results[i][4] = String.valueOf(GeneticAlgorithm.duration / GeneticAlgorithm.iterations);
+
+			results[i][5] = String.valueOf(GeneticAlgorithm.resultValue);
 			
 			
 
@@ -59,14 +65,14 @@ public class Main {
         
         try {
             fileWriter = new FileWriter("data.csv");
-            fileWriter.append("Time,Iterations,Time per Iteration,Value");
+            fileWriter.append("Algorithm Type, Changing Parameter, Time,Iterations,Time per Iteration,Value");
             fileWriter.append("\n");
 
  
             for (int i = 0; i < 100; i++) {
-				for (int j = 0; j < 4; j++) {
-	                fileWriter.append(String.valueOf(results[i][j]));
-	                if (j != 3) {
+				for (int j = 0; j < 6; j++) {
+	                fileWriter.append(results[i][j]);
+	                if (j != 5) {
 		                fileWriter.append(",");
 
 					}
