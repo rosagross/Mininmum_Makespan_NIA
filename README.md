@@ -49,13 +49,13 @@ It makes a copy of every chromosome to fill the whole mating pool with the best 
 ### Recombiner 
 (public interface Recombiner, 
 public class Recombine_Equal_Template, 
-public class Recombine_Template)
+public class Recombine_RandomPartner)
 
 #### Recombine_Equal_Template
-Recombines two chromosomes from the current population (here: mating pool) by applying a template that contains equally many zeros and ones. Each pair of parents creates a second offspring by applying the negation of the template.
+Recombines two chromosomes from the current population (here: mating pool) by applying a template that contains equally many zeros and ones. Each pair of parents creates a second offspring by applying the negation of the template. The pairs are formed by the fitness of the parents
 
-#### Recombine_Template
-Operates similar to Equal_Template, but allows the case that the numbers of zeros and ones in the template differ (slightly).
+#### Recombine_RandomPartner
+Operates similar to Equal_Template, but pairs are formed randomly.
 
 
 
