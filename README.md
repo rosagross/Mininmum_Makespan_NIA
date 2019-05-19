@@ -13,7 +13,7 @@ What is called "population" refers to a set of possible assignments of jobs to m
 
 
 
-## Genetic Algorithm Modules
+## Genetic Algoritm Modules
 
 The following five modules operate in order of reference on a current population (i. e. pool/mating_pool) of possible assignments of jobs to machines. All of them are designed as interfaces, each implemented by two classes that contain different approaches to solve their functionality. Those five modules contain all variables that can be manipulated as features of the algorithm, namely the size of the population, the size of the mating pool and the mutation rate. Those features influence the performance of the algorithm and are therefore crucial for evaluation and improvement.
 
