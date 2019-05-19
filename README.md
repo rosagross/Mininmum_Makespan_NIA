@@ -2,7 +2,7 @@
 # Mininmum_Makespan_NIA
 Homework for Nature inspired algorithms: Genetic Algorithm solving the Minimum Makespan Problem
 
-Hey, überprüft/ergänzt bitte noch die Namen und Beschreibungen der Klassen falls nötig und ansonsten ändert ruhig, was euch noch nicht gefällt :) 
+
 
 ## Problem to be solved
 Assign jobs to equally designed machines such that the duration to complete all jobs (i.e. maximal working time of a machine) is minimal. The application is domain-general. You may think of the problem as assigning printing jobs to printers that operate simultaneously and equally fast. 
