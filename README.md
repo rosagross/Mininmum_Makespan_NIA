@@ -78,7 +78,7 @@ public class Replacer_Delete_All,
 public class Replacer_Elitlist)
 
 #### Replacer_Delete_All
-Deletes almost everything from current population. Only the best solution that was found is taken to the offspring generation.
+Replaces the whole population. If the size of the population is larger than the size of the offspring, the population is filled up with fittest the chromosomes of the population.
 
 #### Replacer_Elitlist
 Creates an offspring generation that contains the fitter half from the old and the fitter half from the new generation.
