@@ -22,9 +22,9 @@ The following five modules operate in order of reference on a current population
 ### Initializer 
 (public interface Initializer, 
 public class Initialize_Equal, 
-public class Random_Init)
+public class Initialize_random)
 
-#### Random_Init
+#### Initialize_random
 The random initializer takes each gene of each chromosome of the population, that has to be generated. 
 It initializes the gene with a random number between 0 and the number of machines -1, such that we have the correct range of possible assignments.
 
