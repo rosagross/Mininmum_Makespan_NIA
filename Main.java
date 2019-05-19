@@ -40,7 +40,7 @@ public class Main {
 		int time_limit = 100;
 		
 		//save results
-		int[][] results = new int[100][4];
+		double[][] results = new double[100][4];
 		for (int i = 0; i < 100; i++) {
 			
 			genAlgorithm.search(p, pop_size, pool_size, mutation_prob, time_limit);
